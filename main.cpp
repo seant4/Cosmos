@@ -7,7 +7,7 @@
 #include "star.h"
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
-//test
+
 int main(){
     Star star;
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation");
