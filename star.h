@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 struct Star{
-    int x, y;
+    int x = 0;
+    int y = 0;
 
 };

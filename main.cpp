@@ -8,12 +8,17 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
+void gen(Star* result){
+    result -> x = rand() % 681;
+    result -> y = rand() % 481; 
+}
+
 int main(){
-    Star star;
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation");
     sf::CircleShape shape(3);
     shape.setFillColor(sf::Color::White);
     window.clear();
+    Star star = {1, 1};
     int i = 0;
     while (window.isOpen()){
         sf::Event event;
@@ -22,19 +27,16 @@ int main(){
                 window.close();
             }
         }
-    window.draw(shape);
-    star.x = rand() % 681;
-    star.y = rand() % 481;
+    gen(&star);
+    std::cout << star.x;
+    std::cout << star.y;
     shape.setPosition(star.x, star.y);
+    window.draw(shape);
     i++;
     window.display();
     if (i > 1000){
         break;
     }
-    }
-    for (int i; i < 100; i++){
-        shape.setPosition(star.x, i);
-        sleep(2000);
     }
     std::cin.ignore();
     return 0;
