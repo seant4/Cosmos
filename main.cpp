@@ -28,13 +28,12 @@ int main(){
             }
         }
     gen(&star);
-    std::cout << star.x;
-    std::cout << star.y;
     shape.setPosition(star.x, star.y);
     window.draw(shape);
     i++;
-    window.display();
+    
     if (i > 1000){
+        window.display();
         break;
     }
     }
