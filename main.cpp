@@ -31,7 +31,6 @@ int main(){
     shape.setPosition(star.x, star.y);
     window.draw(shape);
     i++;
-    
     if (i > 1000){
         window.display();
         break;
