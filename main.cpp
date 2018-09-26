@@ -11,8 +11,8 @@
 
 void gen(Star* result){
     //Generate Galaxy
-    result -> x = rand() % 681;
-    result -> y = rand() % 481;
+    result -> x = rand() % 681;                                     // Generates X position
+    result -> y = rand() % 481;                                     // Generates Y position
     
     
 }
