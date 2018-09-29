@@ -9,8 +9,7 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-void gen(Star* result){
-    //Generate Galaxy
+void gen(Star* result){                                             //Generate Galaxy
     result -> x = rand() % 681;                                     // Generates X position
     result -> y = rand() % 481;                                     // Generates Y position
 }
@@ -18,7 +17,7 @@ void gen(Star* result){
 int main(){
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
-    sf::CircleShape shape(3);                                       // Create circle shape
+    sf::CircleShape shape(1);                                       // Create circle shape
     shape.setFillColor(sf::Color::White);                           // Make it white
     window.clear();                                                 // Clear the window
     Star star = {1, 1};                                             // Define struct
