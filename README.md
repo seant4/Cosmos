@@ -1,15 +1,56 @@
 # Cosmos
-A simulation of the universe (how galaxies are placed and where) in SFML and C++
+### Cosmos is a simulation of black holes colliding in space
 
-The idea is to take the "rules of the universe" and apply it to this simulation, to generate an accurate example of what the universe looks like
+## What happens when black holes collide?
+>### When two black are in space and are within each others gravitational pull, they will move twards eachother, and when they collide, they combine to form a larger black hole. But when this happpens, tons of energy is released from the black hole, these ripples are called [gravitional waves](http://hubblesite.org/explore_astronomy/black_holes/encyc_mod3_q6.html)
 
-Unfortunately, the universe is always expanding, and creating an accurate simulation of the placement of objects in the universe would be nearly impossible, so I have based my rules on general concencis online.
+## How will this be achieved?
+### This program will do a number of things, here are the steps
+>1) Randomly generate two black holes position and size
+>1) The program will determine they're distance from eachother, and decide with is larger
+>1) The smaller black hole moves twards the larger one, and when they collide
+>1) The larger black hole absorbs the smaller black hole, and grows in size relative to the smaller hole it absorbed
+>1) Finally, it will release gravitational waves throghout
 
-So even if this is not completely accurate, it still represents some part of the universe
+## The code
+### This is a C/C++ program using the [SFML](https://www.sfml-dev.org/) graphics library
+### Heres an example ---
+```cpp
+void gen1(blackh_one* result){                                      //Generate Hole One
+    result -> x = rand() % 681;                                     // Generates X position
+    result -> y = rand() % 481;                                     // Generates Y position
+    result -> size = rand() % 25;                                   // Generate Size
+}
 
-> 1) Galaxies can be up to 13 light years away
->>   For my purposes, one pixel will be 1 light year
+void gen2(blackh_two* result){
+    result -> x = rand() % 681;
+    result -> y = rand() % 481;
+    result -> size = rand() % 25;
+}
+```
+### These randomly generate the position and size of each black hole
 
+```cpp
+gen1(&one);                                                      // One black hole 
+    bho.setPosition(one.x, one.y);                                   // Set shape
+    std::map<int, int> bh1;
+    bh1[one.x]=one.y;                                                //Add to map
+    std::cout << one.x, " ", one.y;
+    std::cout << "\n";
+    window.draw(bho);                                                // Draw shapes
+    gen2(&two);
+    bht.setPosition(two.x, two.y);
+    std::map<int, int> bh2;
+    bh2[two.x]=two.y;
+    window.draw(bht);
+    window.display();
+```
+### And here they are drawn and displayed
 
->Work in Progress!, will be adding algorithms to better represent the structure of galaxies in the universe
-
+## This is a work in progress, 
+### Todo
+>1) Move Towards eachother
+>1) Collision event
+>1) Combination event
+>1) Ripple effect
+>1) Growth effect
