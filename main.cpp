@@ -17,7 +17,7 @@ void gen(Star* result){                                             //Generate G
 int main(){
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
-    sf::CircleShape shape(1);                                       // Create circle shape
+    sf::CircleShape shape(5);                                       // Create circle shape
     shape.setFillColor(sf::Color::White);                           // Make it white
     window.clear();                                                 // Clear the window
     Star star = {1, 1};                                             // Define struct
@@ -36,18 +36,28 @@ int main(){
     std::cout << star.x, " ", star.y;
     std::cout << "\n";
     window.draw(shape);                                             // Draw shapes
-    i++;        
-    if (i > 1000){                                                  // When there are 1000 galaxies display
-        window.display();
+    i++;
+    if (i < 10){
         break;
     }
     }
+    
     while (window.isOpen()){                                        // Window event
         sf::Event event;
+        if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up)){
+                window.clear();
+                shape.move(0, -0.5);
+                window.draw(shape);
+                window.display();
+                std::cout << "Moved up";
+            }
         while (window.pollEvent(event)){
+            
             if (event.type == sf::Event::Closed){
                 window.close();
             }
+            
+            
         }
     }
     return 0;
