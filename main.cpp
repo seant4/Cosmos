@@ -9,18 +9,29 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-void gen(Star* result){                                             //Generate Galaxy
+void gen1(blackh_one* result){                                      //Generate Hole One
     result -> x = rand() % 681;                                     // Generates X position
     result -> y = rand() % 481;                                     // Generates Y position
+    result -> size = rand() % 25;                                   // Generate Size
 }
+
+void gen2(blackh_two* result){
+    result -> x = rand() % 681;
+    result -> y = rand() % 481;
+    result -> size = rand() % 25;
+}
+
 
 int main(){
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
-    sf::CircleShape shape(5);                                       // Create circle shape
-    shape.setFillColor(sf::Color::White);                           // Make it white
+    sf::CircleShape bho(5);                                         // Create circle shape
+    bho.setFillColor(sf::Color::White);                             // Make it white
+    sf::CircleShape bht(4);
+    bht.setFillColor(sf::Color::White);
     window.clear();                                                 // Clear the window
-    Star star = {1, 1};                                             // Define struct
+    blackh_one one = {1, 1, 5};                                     // Define struct
+    blackh_two two = {1, 1, 5};
     int i = 0;                                                      // Define i
     while (window.isOpen()){                                        // Window event
         sf::Event event;
@@ -29,28 +40,23 @@ int main(){
                 window.close();
             }
         }
-    gen(&star);                                                     // Generate galaxy
-    shape.setPosition(star.x, star.y);                              // Set shape
-    std::map<int, int> points;
-    points[star.x]=star.y;                                          //Add to map
-    std::cout << star.x, " ", star.y;
+    gen1(&one);                                                      // One black hole 
+    bho.setPosition(one.x, one.y);                                   // Set shape
+    std::map<int, int> bh1;
+    bh1[one.x]=one.y;                                                //Add to map
+    std::cout << one.x, " ", one.y;
     std::cout << "\n";
-    window.draw(shape);                                             // Draw shapes
-    i++;
-    if (i < 10){
-        break;
+    window.draw(bho);                                                // Draw shapes
+    gen2(&two);
+    bht.setPosition(two.x, two.y);
+    std::map<int, int> bh2;
+    bh2[two.x]=two.y;
+    window.draw(bht);
+    window.display();
+    break;
     }
-    }
-    
     while (window.isOpen()){                                        // Window event
         sf::Event event;
-        if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up)){
-                window.clear();
-                shape.move(0, -0.5);
-                window.draw(shape);
-                window.display();
-                std::cout << "Moved up";
-            }
         while (window.pollEvent(event)){
             
             if (event.type == sf::Event::Closed){
