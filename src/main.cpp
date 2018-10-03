@@ -13,6 +13,7 @@ void gen1(blackh_one* result){                                      //Generate H
     result -> x = rand() % 681;                                     // Generates X position
     result -> y = rand() % 481;                                     // Generates Y position
     result -> size = rand() % 25;                                   // Generate Size
+    std::cout << "This is a test";
 }
 
 void gen2(blackh_two* result){
