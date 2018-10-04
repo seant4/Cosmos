@@ -33,14 +33,6 @@ int main(){
     window.clear();                                                 // Clear the window
     blackh_one one = {1, 1, 5};                                     // Define struct
     blackh_two two = {1, 1, 5};
-    int i = 0;                                                      // Define i
-    while (window.isOpen()){                                        // Window event
-        sf::Event event;
-        while (window.pollEvent(event)){
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
     gen1(&one);                                                      // One black hole 
     bho.setPosition(one.x, one.y);                                   // Set shape
     std::map<int, int> bh1;
@@ -54,8 +46,6 @@ int main(){
     bh2[two.x]=two.y;
     window.draw(bht);
     window.display();
-    break;
-    }
     while (window.isOpen()){                                        // Window event
         sf::Event event;
         while (window.pollEvent(event)){
