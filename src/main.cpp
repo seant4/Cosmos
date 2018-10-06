@@ -30,6 +30,7 @@ int main(){
     sf::CircleShape bht(4);
     bht.setFillColor(sf::Color::White);
     window.clear();                                                 // Clear the window
+    //-----------------------------------------------------------------------------------
     blackh_one one = {1, 1, 5};                                     // Define struct
     blackh_two two = {1, 1, 5};
     gen1(&one);                                                      // One black hole 
@@ -44,7 +45,8 @@ int main(){
     std::map<int, int> bh2;
     bh2[two.x]=two.y;
     window.draw(bht);
-    window.display();
+    window.display();                          
+    //------------------------------------------------------------------------------------
     while (window.isOpen()){                                        // Window event
         sf::Event event;
         while (window.pollEvent(event)){
