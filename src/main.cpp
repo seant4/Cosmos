@@ -9,20 +9,6 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-void gen1(blackh_one* result){                                      //Generate Hole One
-    result -> x = rand() % 681;                                     // Generates X position
-    result -> y = rand() % 481;                                     // Generates Y position
-    result -> size = rand() % 25;                                   // Generate Size
-    std::cout << "This is a test";
-}
-
-void gen2(blackh_two* result){
-    result -> x = rand() % 681;
-    result -> y = rand() % 481;
-    result -> size = rand() % 25;
-}
-
-
 int main(){
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
@@ -49,12 +35,9 @@ int main(){
     while (window.isOpen()){                                        // Window event
         sf::Event event;
         while (window.pollEvent(event)){
-            
             if (event.type == sf::Event::Closed){
                 window.close();
             }
-            
-            
         }
     }
     return 0;
