@@ -13,7 +13,6 @@ void gen1(blackh_one* result){                                      //Generate H
     result -> x = rand() % 681;                                     // Generates X position
     result -> y = rand() % 481;                                     // Generates Y position
     result -> size = rand() % 25;                                   // Generate Size
-    std::cout << "This is a test";
 }
 
 void gen2(blackh_two* result){
@@ -23,6 +22,8 @@ void gen2(blackh_two* result){
 }
 
 int main(){
+    int bx = 0;
+    int by = 0;
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
     sf::CircleShape bho(5);                                         // Create circle shape
@@ -48,11 +49,20 @@ int main(){
     window.display();                          
     //------------------------------------------------------------------------------------
     while (window.isOpen()){                                        // Window event
+        sleep(5);
+        window.clear();
+        bho.move(-1 * (one.x - two.x) / 12 ,-1 * (one.y - two.y) / 12 );
+        window.draw(bho);
+        window.draw(bht);
+        window.display();
         sf::Event event;
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed){
                 window.close();
             }
+	    if (one.x == two.y && one.y == two.y){
+		    std::cout << "HIT!";
+	    }
         }
     }
     return 0;
