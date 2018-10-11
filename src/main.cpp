@@ -9,16 +9,19 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-void gen1(blackh_one* result){                                      //Generate Hole One
-    result -> x = rand() % 681;                                     // Generates X position
-    result -> y = rand() % 481;                                     // Generates Y position
-    result -> size = rand() % 25;                                   // Generate Size
+#define L 8
+#define S 24
+
+void gen1(blackh_one* result){                                     //Generate Hole One
+    result -> x = 1 + rand() %((340 + 1) - 1);                     // Generates X position
+    result -> y = 1 + rand() %((481 + 1) - 1);                     // Generates Y position
+    result -> size = 10 + rand() % ((35 + 1) - 10);                // Generate Size
 }
 
 void gen2(blackh_two* result){
-    result -> x = rand() % 681;
-    result -> y = rand() % 481;
-    result -> size = rand() % 25;
+    result -> x = 340 + rand() %((681 + 1) - 340);
+    result -> y = 1 + rand() %((481 + 1) - 1);
+    result -> size = 10 + rand() % ((35 + 1) - 10);
 }
 
 int main(){
@@ -26,43 +29,50 @@ int main(){
     int by = 0;
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
-    sf::CircleShape bho(5);                                         // Create circle shape
-    bho.setFillColor(sf::Color::White);                             // Make it white
-    sf::CircleShape bht(4);
-    bht.setFillColor(sf::Color::White);
     window.clear();                                                 // Clear the window
     //-----------------------------------------------------------------------------------
     blackh_one one = {1, 1, 5};                                     // Define struct
     blackh_two two = {1, 1, 5};
-    gen1(&one);                                                      // One black hole 
+    gen1(&one);                                                      // One black hole
+    sf::CircleShape bho(one.size); 
     bho.setPosition(one.x, one.y);                                   // Set shape
-    std::map<int, int> bh1;
-    bh1[one.x]=one.y;                                                //Add to map
+    bho.setFillColor(sf::Color::White);
     std::cout << one.x, " ", one.y;
     std::cout << "\n";
     window.draw(bho);                                                // Draw shapes
     gen2(&two);
+    sf::CircleShape bht(two.size);
+    bht.setFillColor(sf::Color::Blue);
     bht.setPosition(two.x, two.y);
-    std::map<int, int> bh2;
-    bh2[two.x]=two.y;
     window.draw(bht);
-    window.display();                          
+    window.display();                         
     //------------------------------------------------------------------------------------
-    while (window.isOpen()){                                        // Window event
-        sleep(5);
-        window.clear();
-        bho.move(-1 * (one.x - two.x) / 12 ,-1 * (one.y - two.y) / 12 );
-        window.draw(bho);
-        window.draw(bht);
-        window.display();
+    while (window.isOpen()){	    // Window event
+	window.clear();
+	if (one.size > two.size){
+		bho.move(-1 * (one.x - two.x) / S ,-1 * (one.y - two.y) / S );
+		bht.move((one.x - two.x) / L,(one.y - two.y) / L );
+		window.draw(bho);
+		window.draw(bht);
+		window.display();
+		sleep(1);
+	}else{
+        	bht.move((one.x - two.x) / S ,(one.y - two.y) / S );
+                bho.move(-1 * (one.x - two.x) / L,-1 * (one.y - two.y) / L );
+                window.draw(bho);
+                window.draw(bht);
+                window.display();
+		sleep(1);
+	}
+	if (bho.getRadius() + bht.getRadius() > bho.getPosition().x - bht.getPosition().x && bho.getPosition().y - bht.getPosition().y){
+		window.close();
+	}
+
         sf::Event event;
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed){
                 window.close();
             }
-	    if (one.x == two.y && one.y == two.y){
-		    std::cout << "HIT!";
-	    }
         }
     }
     return 0;
