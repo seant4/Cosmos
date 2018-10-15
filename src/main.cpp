@@ -9,8 +9,10 @@
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-#define L 8
-#define S 24
+#define L 36
+#define S 84
+
+unsigned int microseconds;
 
 void gen1(blackh_one* result){                                     //Generate Hole One
     result -> x = 1 + rand() %((340 + 1) - 1);                     // Generates X position
@@ -44,28 +46,30 @@ int main(){
     sf::CircleShape bht(two.size);
     bht.setFillColor(sf::Color::Blue);
     bht.setPosition(two.x, two.y);
+    bho.setOrigin(bho.getRadius(), bho.getRadius());
+    bht.setOrigin(bht.getRadius(), bht.getRadius());
     window.draw(bht);
     window.display();                         
     //------------------------------------------------------------------------------------
     while (window.isOpen()){	    // Window event
 	window.clear();
-	if (one.size > two.size){
+	if (bho.getRadius() > bht.getRadius()){
 		bho.move(-1 * (one.x - two.x) / S ,-1 * (one.y - two.y) / S );
 		bht.move((one.x - two.x) / L,(one.y - two.y) / L );
 		window.draw(bho);
 		window.draw(bht);
 		window.display();
-		sleep(1);
+		usleep(100000);
 	}else{
         	bht.move((one.x - two.x) / S ,(one.y - two.y) / S );
                 bho.move(-1 * (one.x - two.x) / L,-1 * (one.y - two.y) / L );
                 window.draw(bho);
                 window.draw(bht);
                 window.display();
-		sleep(1);
+		usleep(100000);
 	}
-	if (bho.getRadius() + bht.getRadius() > bho.getPosition().x - bht.getPosition().x && bho.getPosition().y - bht.getPosition().y){
-		window.close();
+	if (bho.getRadius() + bht.getRadius() < bho.getPosition().x - bht.getPosition().x && bho.getPosition().y - bht.getPosition().y){
+	//	window.close();
 	}
 
         sf::Event event;
