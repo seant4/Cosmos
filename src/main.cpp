@@ -2,15 +2,13 @@
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
-#include <ctime>
-#include <map>
 
 #include "star.h"
 //run g++ -c main.cpp
 //after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-#define L 36
-#define S 84
+#define SMALLGPULL 36
+#define BIGGPULL 84
 
 unsigned int microseconds;
 
@@ -49,20 +47,23 @@ int main(){
     bho.setOrigin(bho.getRadius(), bho.getRadius());
     bht.setOrigin(bht.getRadius(), bht.getRadius());
     window.draw(bht);
-    window.display();                         
+    window.display();  
+    int spd = 85;    
     //------------------------------------------------------------------------------------
     while (window.isOpen()){	    // Window event
 	window.clear();
 	if (bho.getRadius() > bht.getRadius()){
-		bho.move(-1 * (one.x - two.x) / S ,-1 * (one.y - two.y) / S );
-		bht.move((one.x - two.x) / L,(one.y - two.y) / L );
+		spd -= 2;
+		bho.move(-1 * (bho.getPosition().x - bht.getPosition().x) / BIGGPULL ,-1 * (bho.getPosition().y - bht.getPosition().y) / BIGGPULL );
+		bht.move((bho.getPosition().x - bht.getPosition().x) / spd,(bho.getPosition().y - bht.getPosition().y) / spd );
 		window.draw(bho);
 		window.draw(bht);
 		window.display();
 		usleep(100000);
 	}else{
-        	bht.move((one.x - two.x) / S ,(one.y - two.y) / S );
-                bho.move(-1 * (one.x - two.x) / L,-1 * (one.y - two.y) / L );
+		spd -= 2;
+        	bht.move((bho.getPosition().x - bht.getPosition().x) / BIGGPULL ,(bho.getPosition().y - bht.getPosition().y) / BIGGPULL );
+                bho.move(-1 * (bho.getPosition().x - bht.getPosition().x) / spd,-1 * (bho.getPosition().y - bht.getPosition().y) / spd );
                 window.draw(bho);
                 window.draw(bht);
                 window.display();
