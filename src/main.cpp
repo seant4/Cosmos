@@ -69,8 +69,8 @@ int main(){
                 window.display();
 		usleep(100000);
 	}
-	if (bho.getRadius() + bht.getRadius() < bho.getPosition().x - bht.getPosition().x && bho.getPosition().y - bht.getPosition().y){
-	//	window.close();
+	if (bho.getPosition() == bht.getPosition()){
+		window.close();
 	}
 
         sf::Event event;
