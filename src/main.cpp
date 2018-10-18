@@ -34,8 +34,6 @@ int main(){
     sf::CircleShape bho(one.size); 
     bho.setPosition(one.x, one.y);                                   // Set shape
     bho.setFillColor(sf::Color::White);
-    std::cout << one.x, " ", one.y;
-    std::cout << "\n";
     window.draw(bho);                                                // Draw shapes
     gen2(&two);
     sf::CircleShape bht(two.size);
