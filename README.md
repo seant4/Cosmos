@@ -49,8 +49,8 @@ gen1(&one);                                                      // One black ho
 
 ## This is a work in progress, 
 ### Todo
->1) Move Towards eachother
->1) Collision event
->1) Combination event
+>1) ~~Move Towards eachother~~
+>1) ~~Collision event~~
+>1) ~~Combination event~~
 >1) Ripple effect
->1) Growth effect
+>1) ~~Growth effect~~
