@@ -31,19 +31,22 @@ void gen2(blackh_two* result){
 ### These randomly generate the position and size of each black hole
 
 ```cpp
-gen1(&one);                                                      // One black hole 
+    blackh_one one = {1, 1, 5};                                     // Define struct
+    blackh_two two = {1, 1, 5};
+    gen1(&one);                                                      // One black hole
+    sf::CircleShape bho(one.size);
     bho.setPosition(one.x, one.y);                                   // Set shape
-    std::map<int, int> bh1;
-    bh1[one.x]=one.y;                                                //Add to map
-    std::cout << one.x, " ", one.y;
-    std::cout << "\n";
+    bho.setFillColor(sf::Color::White);
     window.draw(bho);                                                // Draw shapes
     gen2(&two);
+    sf::CircleShape bht(two.size);
+    bht.setFillColor(sf::Color::Blue);
     bht.setPosition(two.x, two.y);
-    std::map<int, int> bh2;
-    bh2[two.x]=two.y;
+    bho.setOrigin(bho.getRadius(), bho.getRadius());
+    bht.setOrigin(bht.getRadius(), bht.getRadius());
     window.draw(bht);
     window.display();
+
 ```
 ### And here they are drawn and displayed
 
