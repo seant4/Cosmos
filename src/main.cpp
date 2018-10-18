@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
-
+//test
 #include "star.h"
 
 #define BIGGPULL 84
