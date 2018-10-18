@@ -4,10 +4,7 @@
 #include <unistd.h>
 
 #include "star.h"
-//run g++ -c main.cpp
-//after first compile, run g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-#define SMALLGPULL 36
 #define BIGGPULL 84
 
 unsigned int microseconds;
@@ -70,9 +67,17 @@ int main(){
 		usleep(100000);
 	}
 	if (bho.getPosition() == bht.getPosition()){
-		window.close();
+		int sx = bho.getRadius() + bht.getRadius();
+		sf::CircleShape bh3(sx);
+		bh3.setFillColor(sf::Color::White);
+		bh3.setPosition(bho.getPosition().x, bho.getPosition().y);
+		bh3.setOrigin(bh3.getRadius(), bh3.getRadius());
+		while (true){
+			window.clear();
+			window.draw(bh3);
+			window.display();
+		}
 	}
-
         sf::Event event;
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed){
