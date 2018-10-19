@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
-//test
+
 #include "star.h"
 
 #define BIGGPULL 84
@@ -21,67 +21,81 @@ void gen2(blackh_two* result){
     result -> size = 10 + rand() % ((35 + 1) - 10);
 }
 
+sf::CircleShape intOne(blackh_one * result, sf::CircleShape *bho){                                 
+    bho->setFillColor(sf::Color::White);
+    bho->setPosition(result->x, result->y);
+    bho->setOrigin(bho->getRadius(), bho->getRadius());                                             //Draw object
+    return *bho;
+}
+
+sf::CircleShape intTwo(blackh_two * result, sf::CircleShape *bht){
+    bht->setFillColor(sf::Color::Blue);
+    bht->setOrigin(bht->getRadius(), bht->getRadius());
+    bht->setPosition(result->x, result->y);
+    return *bht;
+}
+
 int main(){
-    int bx = 0;
-    int by = 0;
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
     window.clear();                                                 // Clear the window
     //-----------------------------------------------------------------------------------
-    blackh_one one = {1, 1, 5};                                     // Define struct
+    blackh_one one = {1, 1, 5};
     blackh_two two = {1, 1, 5};
-    gen1(&one);                                                      // One black hole
-    sf::CircleShape bho(one.size); 
-    bho.setPosition(one.x, one.y);                                   // Set shape
-    bho.setFillColor(sf::Color::White);
-    window.draw(bho);                                                // Draw shapes
+    gen1(&one); 
     gen2(&two);
-    sf::CircleShape bht(two.size);
-    bht.setFillColor(sf::Color::Blue);
-    bht.setPosition(two.x, two.y);
-    bho.setOrigin(bho.getRadius(), bho.getRadius());
-    bht.setOrigin(bht.getRadius(), bht.getRadius());
-    window.draw(bht);
-    window.display();  
-    int spd = 85;    
+    sf::CircleShape *bht = new sf::CircleShape(two.size);
+    sf::CircleShape *bho = new sf::CircleShape(one.size);
+    intOne(&one, bho);
+    intTwo(&two, bht);
+    window.draw(*bho);
+    window.draw(*bht);
+    window.display(); 
+    int sx = bho->getRadius() + bht->getRadius(); 
+    sf::CircleShape bh3(sx);
+    bh3.setPosition(7000, 0);
     //------------------------------------------------------------------------------------
+    int spd = 85;  
     while (window.isOpen()){	    // Window event
 	window.clear();
-	if (bho.getRadius() > bht.getRadius()){
+	window.draw(bh3);
+	window.display();
+	if (bho->getRadius() > bht->getRadius()){
 		spd -= 2;
-		bho.move(-1 * (bho.getPosition().x - bht.getPosition().x) / BIGGPULL ,-1 * (bho.getPosition().y - bht.getPosition().y) / BIGGPULL );
-		bht.move((bho.getPosition().x - bht.getPosition().x) / spd,(bho.getPosition().y - bht.getPosition().y) / spd );
-		window.draw(bho);
-		window.draw(bht);
+		bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
+		bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );
+		window.draw(*bho);
+		window.draw(*bht);
 		window.display();
 		usleep(100000);
 	}else{
 		spd -= 2;
-        	bht.move((bho.getPosition().x - bht.getPosition().x) / BIGGPULL ,(bho.getPosition().y - bht.getPosition().y) / BIGGPULL );
-                bho.move(-1 * (bho.getPosition().x - bht.getPosition().x) / spd,-1 * (bho.getPosition().y - bht.getPosition().y) / spd );
-                window.draw(bho);
-                window.draw(bht);
+        	bht->move((bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,(bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
+                bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
+                window.draw(*bho);
+                window.draw(*bht);
                 window.display();
 		usleep(100000);
 	}
-	if (bho.getPosition() == bht.getPosition()){
-		int sx = bho.getRadius() + bht.getRadius();
-		sf::CircleShape bh3(sx);
+	if (bho->getPosition() == bht->getPosition()){
 		bh3.setFillColor(sf::Color::White);
-		bh3.setPosition(bho.getPosition().x, bho.getPosition().y);
+		bh3.setPosition(bho->getPosition().x, bho->getPosition().y);
 		bh3.setOrigin(bh3.getRadius(), bh3.getRadius());
-		while (true){
-			window.clear();
-			window.draw(bh3);
-			window.display();
+		window.clear();
+		window.draw(bh3);
+		window.display();
+	}
+	sf::Event event;
+	while (window.pollEvent(event)){
+		window.clear();
+		window.draw(bh3);
+		window.display();
+		if (event.type == sf::Event::Closed){
+			std::cout << "Seeya!";
+			delete bho, bht;
+			window.close();
 		}
 	}
-        sf::Event event;
-        while (window.pollEvent(event)){
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
     }
     return 0;
 }
