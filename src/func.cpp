@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "star.h"
+#include "../include/data.h"
 
 void gen1(blackh_one* result){                                     //Generate Hole One
     result -> x = 1 + rand() %((340 + 1) - 1);                     // Generates X position
