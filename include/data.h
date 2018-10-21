@@ -1,5 +1,3 @@
-#include <stdlib.h>
-
 struct blackh_one{
     int x = 0;
     int y = 0;

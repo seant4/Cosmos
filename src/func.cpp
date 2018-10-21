@@ -25,3 +25,12 @@ sf::CircleShape intTwo(blackh_two * result, sf::CircleShape *bht){
     bht->setPosition(result->x, result->y);
     return *bht;
 }
+
+sf::CircleShape intThree(sf::CircleShape *bh3, sf::CircleShape *bht, sf::CircleShape *bho){
+    bh3->setFillColor(sf::Color::White);
+	bht->setFillColor(sf::Color::White);
+	bho->setFillColor(sf::Color::White);
+	bh3->setPosition(bho->getPosition().x, bho->getPosition().y);
+	bh3->setOrigin(bh3->getRadius(), bh3->getRadius());
+    return *bh3;
+}
