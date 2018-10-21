@@ -36,7 +36,7 @@ test
     window.display();
 
 ```
-###This code is an a while loop, and moves the black holes based on gravitational pull
+### This code is an a while loop, and moves the black holes based on gravitational pull
 
 ## This is a work in progress, 
 ### Todo
