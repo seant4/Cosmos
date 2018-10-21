@@ -30,10 +30,10 @@ test
 ## The logic
 ```cpp
     bht->move((bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,(bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
-                bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
-                window.draw(*bho);
-                window.draw(*bht);
-                window.display();
+    bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
+    window.draw(*bho);
+    window.draw(*bht);
+    window.display();
 
 ```
 ###This code is an a while loop, and moves the black holes based on gravitational pull
