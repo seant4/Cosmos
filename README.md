@@ -1,7 +1,7 @@
 # Cosmos
 ### Cosmos is a simulation of black holes colliding in space
 ## What happens when black holes collide?
->### When two black are in space and are within each others gravitational pull, they will move twards eachother, and when they collide, they combine to form a larger black hole. But when this happpens, tons of energy is released from the black hole, these ripples are called [gravitional waves](http://hubblesite.org/explore_astronomy/black_holes/encyc_mod3_q6.html)
+>### When two black are in space and are within each others gravitational pull, they will move twards eachother, and when they collide, they combine to form a larger black hole. But when this happpens, tons of energy is released from the black hole, these ripples are called [gravitational waves](http://hubblesite.org/explore_astronomy/black_holes/encyc_mod3_q6.html)
 
 ## How will this be achieved?
 ### This program will do a number of things, here are the steps
