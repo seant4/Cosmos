@@ -14,9 +14,10 @@ void gen2(blackh_two* result);
 sf::CircleShape intOne(blackh_one * result, sf::CircleShape *bho);
 sf::CircleShape intTwo(blackh_two * result, sf::CircleShape *bht);
 sf::CircleShape intThree(sf::CircleShape *bh3, sf::CircleShape *bht, sf::CircleShape *bho);
+sf::CircleShape intWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
+sf::CircleShape growWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
+
 //-----------------------------------------------------------------------------------
-
-
 int main(){
     srand(time(NULL));                                              // Generate random seed based on time of day
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
@@ -35,17 +36,18 @@ int main(){
     int sx = bho->getRadius() + bht->getRadius();		    		// Define sx variable
     sf::CircleShape *bh3 = new sf::CircleShape(sx);					// Define black hole 3 object
     bh3->setPosition(7000, 0);					    				// Set position of black hole 3 object off screen
+	sf::CircleShape *waves = new sf::CircleShape(sx);
 //------------------------------------------------------------------------------------
-    int spd = 85;  						    // Define speed variable
-    while (window.isOpen()){	    				    // Window event
-	window.clear();						    // Clear the screen
-	window.draw(*bh3);					    // Draw black hole 3
-	window.display();					    // Display shapes on screen
+    int spd = 85;  						   // Define speed variable
+    while (window.isOpen()){	    		// Window event
+	window.clear();						   // Clear the screen
+	window.draw(*bh3);					  // Draw black hole 3
+	window.display();					  // Display shapes on screen
 //------------------------------------------------------------------------------------
 	if (bho->getRadius() > bht->getRadius()){
 		spd -= 2;					    // Decrement speed vaiable
-		bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );				    // Move the larger black hole towards the smaller black hole
-		bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );							    // Move the smaller black hole towards the larger black hole 
+		bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );	// Move the larger black hole towards the smaller black hole
+		bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );						// Move the smaller black hole towards the larger black hole 
 		window.draw(*bho);
 		window.draw(*bht);
 		window.display();
@@ -66,16 +68,30 @@ int main(){
 		window.clear();
 		window.draw(*bh3);
 		window.display();
+		intWaves(waves, bh3);
+		for(int i = 0; i < 100; i++){
+			growWaves(waves, bh3);
+			window.clear();
+			window.draw(*waves);
+			window.draw(*bh3);
+			window.display();
+			usleep(10000);
+		}
+		/*This will be used for a reset button
+						window.close();
+						delete bho, bht, bh3, waves;
+						main();
+					*/
 	}
 //-------------------------------------------------------------------------------------
 	sf::Event event;
 	while (window.pollEvent(event)){
 		if (event.type == sf::Event::Closed){
-			delete bho, bht, bh3;
+			delete bho, bht, bh3, waves;
 			window.close();
 		}
 	}
-    }
+	}
 //------------------------------------------------------------------------------------
     return 0;
 }
