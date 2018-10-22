@@ -22,8 +22,8 @@ int main(){
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
     window.clear();                                                 // Clear the window
 //-----------------------------------------------------------------------------------
-	blackh_one one = {1, 1, 5};					    				// Initialize one struct
-	blackh_two two = {1, 1, 5};					    				// Initialize two struct
+    blackh_one one = {1, 1, 5};					    				// Initialize one struct
+    blackh_two two = {1, 1, 5};					    				// Initialize two struct
     gen1(&one); 						    						// Populate 1 struct
     gen2(&two);							                            // Populate 2 struct
     sf::CircleShape *bht = new sf::CircleShape(two.size);	 		// Define bht pointer object
