@@ -38,43 +38,43 @@ int main(){
 //------------------------------------------------------------------------------------
     int spd = 85;  						    // Define speed variable
     while (window.isOpen()){	    				    // Window event
-		window.clear();						    // Clear the screen
-		window.draw(*bh3);					    // Draw black hole 3
-		window.display();					    // Display shapes on screen
+	window.clear();						    // Clear the screen
+	window.draw(*bh3);					    // Draw black hole 3
+	window.display();					    // Display shapes on screen
 //------------------------------------------------------------------------------------
-		if (bho->getRadius() > bht->getRadius()){
-			spd -= 2;					    // Decrement speed vaiable
-			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );				    // Move the larger black hole towards the smaller black hole
-			bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );							    // Move the smaller black hole towards the larger black hole 
-			window.draw(*bho);
-			window.draw(*bht);
-			window.display();
-			usleep(100000);
+	if (bho->getRadius() > bht->getRadius()){
+		spd -= 2;					    // Decrement speed vaiable
+		bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );				    // Move the larger black hole towards the smaller black hole
+		bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );							    // Move the smaller black hole towards the larger black hole 
+		window.draw(*bho);
+		window.draw(*bht);
+		window.display();
+		usleep(100000);
 //--------------------------------------------------------------------------------------
-		}else{
-			spd -= 2;
-    	    bht->move((bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,(bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
-    	    bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
-    	    window.draw(*bho);
-    	    window.draw(*bht);
-    	    window.display();
-			usleep(100000);
-		}
+	}else{
+		spd -= 2;
+    	    	bht->move((bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,(bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
+    	    	bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
+    	    	window.draw(*bho);
+    	    	window.draw(*bht);
+    	    	window.display();
+		usleep(100000);
+	}
 //-------------------------------------------------------------------------------------
-		if (bho->getPosition() == bht->getPosition()){
-			intThree(bh3, bht, bho);
-			window.clear();
-			window.draw(*bh3);
-			window.display();
-		}
+	if (bho->getPosition() == bht->getPosition()){
+		intThree(bh3, bht, bho);
+		window.clear();
+		window.draw(*bh3);
+		window.display();
+	}
 //-------------------------------------------------------------------------------------
-		sf::Event event;
-		while (window.pollEvent(event)){
-			if (event.type == sf::Event::Closed){
-				delete bho, bht, bh3;
-				window.close();
-			}
+	sf::Event event;
+	while (window.pollEvent(event)){
+		if (event.type == sf::Event::Closed){
+			delete bho, bht, bh3;
+			window.close();
 		}
+	}
     }
 //------------------------------------------------------------------------------------
     return 0;
