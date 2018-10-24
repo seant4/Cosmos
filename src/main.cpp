@@ -46,9 +46,9 @@ int main(){
 		window.display();				   // Display shapes on screen
 //------------------------------------------------------------------------------------
 		if (bho->getRadius() > bht->getRadius()){
-			spd -= 2;					    // Decrement speed vaiable
+			spd -= 2;				   // Decrement speed vaiable
 			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );	// Move the larger black hole towards the smaller black hole
-			bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );						// Move the smaller black hole towards the larger black hole 
+			bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );				// Move the smaller black hole towards the larger black hole 
 			window.draw(*bho);
 			window.draw(*bht);
 			window.display();
