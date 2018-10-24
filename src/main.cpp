@@ -23,27 +23,27 @@ int main(){
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
     window.clear();                                                 // Clear the window
 //-----------------------------------------------------------------------------------
-    blackh_one one = {1, 1, 5};					    				// Initialize one struct
-    blackh_two two = {1, 1, 5};					    				// Initialize two struct
-    gen1(&one); 						    						// Populate 1 struct
-    gen2(&two);							                            // Populate 2 struct
-    sf::CircleShape *bht = new sf::CircleShape(two.size);	 		// Define bht pointer object
-    sf::CircleShape *bho = new sf::CircleShape(one.size);  			// Define bho pointer object
-    intOne(&one, bho);						                        // Populate bho pointer object
-    intTwo(&two, bht);						                        // Populate bht pointer object
-    int sx = bho->getRadius() + bht->getRadius();		    		// Define sx variable
-    sf::CircleShape *bh3 = new sf::CircleShape(sx);					// Define black hole 3 object
-    bh3->setPosition(7000, 0);					    				// Set position of black hole 3 object off screen
-	sf::CircleShape *waves = new sf::CircleShape(sx);
-	window.draw(*bho);						    					// Draw black hole one
-    window.draw(*bht);						    					// Draw black hole two
-	window.display();
+    blackh_one one = {1, 1, 5};					    // Initialize one struct
+    blackh_two two = {1, 1, 5};					    // Initialize two struct
+    gen1(&one); 						    // Populate 1 struct
+    gen2(&two);							    // Populate 2 struct
+    sf::CircleShape *bht = new sf::CircleShape(two.size);	    // Define bht pointer object
+    sf::CircleShape *bho = new sf::CircleShape(one.size);  	    // Define bho pointer object
+    intOne(&one, bho);						    // Populate bho pointer object
+    intTwo(&two, bht);						    // Populate bht pointer object
+    int sx = bho->getRadius() + bht->getRadius();		    // Define sx variable
+    sf::CircleShape *bh3 = new sf::CircleShape(sx);		    // Define black hole 3 object
+    bh3->setPosition(7000, 0);					    // Set position of black hole 3 object off screen
+    sf::CircleShape *waves = new sf::CircleShape(sx);
+    window.draw(*bho);					            // Draw black hole one
+    window.draw(*bht);						    // Draw black hole two
+    window.display();
 //------------------------------------------------------------------------------------
     int spd = 85;  						   // Define speed variable
-    while (window.isOpen()){	    		// Window event
-		window.clear();						   // Clear the screen
-		window.draw(*bh3);					  // Draw black hole 3
-		window.display();					  // Display shapes on screen
+    while (window.isOpen()){	    				   // Window event
+		window.clear();					   // Clear the screen
+		window.draw(*bh3);				   // Draw black hole 3
+		window.display();				   // Display shapes on screen
 //------------------------------------------------------------------------------------
 		if (bho->getRadius() > bht->getRadius()){
 			spd -= 2;					    // Decrement speed vaiable
