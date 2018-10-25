@@ -2,13 +2,13 @@
 
 #include "../include/data.h"
 
-void gen(blackh_one* result){                                     //Generate Hole One
+void gen(blackh* result){                                     //Generate Hole One
     result -> x = 1 + rand() %((340 + 1) - 1);                     // Generates X position
     result -> y = 1 + rand() %((481 + 1) - 1);                     // Generates Y position
     result -> size = 10 + rand() % ((35 + 1) - 10);                // Generate Size
 }
 
-sf::CircleShape intHole(blackh_one * result, sf::CircleShape *bho){                                 
+sf::CircleShape intHole(blackh * result, sf::CircleShape *bho){                                 
     bho->setFillColor(sf::Color::White);
     bho->setPosition(result->x, result->y);
     bho->setOrigin(bho->getRadius(), bho->getRadius());             // Draw object

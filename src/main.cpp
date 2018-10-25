@@ -9,8 +9,8 @@
 
 unsigned int microseconds;
 
-void gen(blackh_one* result);
-sf::CircleShape intHole(blackh_one * result, sf::CircleShape *bho);
+void gen(blackh* result);
+sf::CircleShape intHole(blackh * result, sf::CircleShape *bho);
 sf::CircleShape intThree(sf::CircleShape *bh3, sf::CircleShape *bht, sf::CircleShape *bho);
 sf::CircleShape intWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
 sf::CircleShape growWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
@@ -21,13 +21,13 @@ int main(){
     sf::RenderWindow window(sf::VideoMode(680, 480), "Simulation"); // Define window
     window.clear();                                                 // Clear the window
 //-----------------------------------------------------------------------------------
-    blackh_one one = {0, 0, 0};					    // Initialize one struct
-    gen(&one); 						    // Populate 1 struct
-    sf::CircleShape *bho = new sf::CircleShape(one.size);
-    intHole(&one, bho);						    // Populate bho pointer o
-    gen(&one);							    // Populate 2 struct
-    sf::CircleShape *bht = new sf::CircleShape(one.size);  	    // Define bho pointer object
-    intHole(&one, bht);						    // Populate bht pointer object
+    blackh data = {0, 0, 0};					    // Initialize one struct
+    gen(&data); 						    // Populate 1 struct
+    sf::CircleShape *bho = new sf::CircleShape(data.size);
+    intHole(&data, bho);						    // Populate bho pointer o
+    gen(&data);							    // Populate 2 struct
+    sf::CircleShape *bht = new sf::CircleShape(data.size);  	    // Define bho pointer object
+    intHole(&data, bht);						    // Populate bht pointer object
     int sx = bho->getRadius() + bht->getRadius();		    // Define sx variable
     sf::CircleShape *bh3 = new sf::CircleShape(sx);		    // Define black hole 3 object
     bh3->setPosition(7000, 0);					    // Set position of black hole 3 object off screen
