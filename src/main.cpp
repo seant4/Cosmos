@@ -5,15 +5,7 @@
 
 #include "../include/data.h"
 
-#define BIGGPULL 84
-
 unsigned int microseconds;
-
-void gen(blackh* result);
-sf::CircleShape intHole(blackh * result, sf::CircleShape *bho);
-sf::CircleShape intThree(sf::CircleShape *bh3, sf::CircleShape *bht, sf::CircleShape *bho);
-sf::CircleShape intWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
-sf::CircleShape growWaves(sf::CircleShape *waves, sf::CircleShape *bh3);
 
 //-----------------------------------------------------------------------------------
 int main(){
@@ -36,25 +28,25 @@ int main(){
     window.draw(*bht);						    // Draw black hole two
     window.display();
 //------------------------------------------------------------------------------------
-    int spd = 85;  						   // Define speed variable
+    int gpull = 85;  						   // Define speed variable
     while (window.isOpen()){	    				   // Window event
 		window.clear();					   // Clear the screen
 		window.draw(*bh3);				   // Draw black hole 3
 		window.display();				   // Display shapes on screen
 //------------------------------------------------------------------------------------
 		if (bho->getRadius() > bht->getRadius()){
-			spd -= 2;				   // Decrement speed vaiable
-			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,-1 * (bho->getPosition().y - bht->getPosition().y) / BIGGPULL );	// Move the larger black hole towards the smaller black hole
-			bht->move((bho->getPosition().x - bht->getPosition().x) / spd,(bho->getPosition().y - bht->getPosition().y) / spd );				// Move the smaller black hole towards the larger black hole 
+			gpull -= 4;				   // Decrement speed vaiable
+			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );	// Move the larger black hole towards the smaller black hole
+			bht->move((bho->getPosition().x - bht->getPosition().x) / gpull,(bho->getPosition().y - bht->getPosition().y) / gpull );				// Move the smaller black hole towards the larger black hole 
 			window.draw(*bho);
 			window.draw(*bht);
 			window.display();
 			usleep(100000);
 //--------------------------------------------------------------------------------------
 		}else{
-			spd -= 2;
-    		    	bht->move((bho->getPosition().x - bht->getPosition().x) / BIGGPULL ,(bho->getPosition().y - bht->getPosition().y) / BIGGPULL );
-    		    	bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / spd,-1 * (bho->getPosition().y - bht->getPosition().y) / spd );
+			gpull -= 4;
+    		    	bht->move((bho->getPosition().x - bht->getPosition().x) / gpull ,(bho->getPosition().y - bht->getPosition().y) / gpull );
+    		    	bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );
     		    	window.draw(*bho);
     		    	window.draw(*bht);
     		    	window.display();
@@ -83,6 +75,7 @@ int main(){
 			if (event.type == sf::Event::Closed){
 				delete bho, bht, bh3, waves;
 				window.close();
+
 			}else if (event.mouseButton.button == sf::Mouse::Left){
 				window.close();
 				delete bho, bht, bh3, waves;
