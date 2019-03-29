@@ -29,60 +29,60 @@ int main(){
     window.display();
 //------------------------------------------------------------------------------------
     int gpull = 85;  						   // Define speed variable
-    while (window.isOpen()){	    				   // Window event
-		window.clear();					   // Clear the screen
-		window.draw(*bh3);				   // Draw black hole 3
-		window.display();				   // Display shapes on screen
+    	while (window.isOpen()){	    				   // Window event
+			window.clear();					   // Clear the screen
+			window.draw(*bh3);				   // Draw black hole 3
+			window.display();				   // Display shapes on screen
 //------------------------------------------------------------------------------------
-		if (bho->getRadius() > bht->getRadius()){
-			gpull -= 4;				   // Decrement speed vaiable
-			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );	// Move the larger black hole towards the smaller black hole
-			bht->move((bho->getPosition().x - bht->getPosition().x) / gpull,(bho->getPosition().y - bht->getPosition().y) / gpull );				// Move the smaller black hole towards the larger black hole 
-			window.draw(*bho);
-			window.draw(*bht);
-			window.display();
-			usleep(100000);
+			if (bho->getRadius() > bht->getRadius()){
+				gpull -= 4;				   // Decrement speed vaiable
+				bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );	// Move the larger black hole towards the smaller black hole
+				bht->move((bho->getPosition().x - bht->getPosition().x) / gpull,(bho->getPosition().y - bht->getPosition().y) / gpull );				// Move the smaller black hole towards the larger black hole 
+				window.draw(*bho);
+				window.draw(*bht);
+				window.display();
+				usleep(100000);
 //--------------------------------------------------------------------------------------
-		}else{
-			gpull -= 4;
-    		    	bht->move((bho->getPosition().x - bht->getPosition().x) / gpull ,(bho->getPosition().y - bht->getPosition().y) / gpull );
-    		    	bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );
-    		    	window.draw(*bho);
-    		    	window.draw(*bht);
-    		    	window.display();
-			usleep(100000);
-		}
+			}else{
+				gpull -= 4;
+    			bht->move((bho->getPosition().x - bht->getPosition().x) / gpull ,(bho->getPosition().y - bht->getPosition().y) / gpull );
+    			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );
+    			window.draw(*bho);
+    			window.draw(*bht);
+    		 	window.display();
+				usleep(100000);
+			}
 //-------------------------------------------------------------------------------------
-		if (bho->getPosition() == bht->getPosition()){
-			intThree(bh3, bht, bho);
-			window.clear();
-			window.draw(*bh3);
-			window.display();
-			intWaves(waves, bh3);
-			
-			for(int i = 0; i < 100; i++){
-				growWaves(waves, bh3);
+			if (bho->getPosition() == bht->getPosition()){
+				intThree(bh3, bht, bho);
 				window.clear();
-				window.draw(*waves);
 				window.draw(*bh3);
 				window.display();
-				usleep(10000);
+				intWaves(waves, bh3);
+			
+				for(int i = 0; i < 100; i++){
+					growWaves(waves, bh3);
+					window.clear();
+					window.draw(*waves);
+					window.draw(*bh3);
+					window.display();
+					usleep(10000);
+				}
 			}
-		}
 //-------------------------------------------------------------------------------------
-		sf::Event event;
-		while (window.pollEvent(event)){
-			if (event.type == sf::Event::Closed){
-				delete bho, bht, bh3, waves;
-				window.close();
+			sf::Event event;
+			while (window.pollEvent(event)){
+				if (event.type == sf::Event::Closed){
+					delete bho, bht, bh3, waves;
+					window.close();
 
-			}else if (event.mouseButton.button == sf::Mouse::Left){
-				window.close();
-				delete bho, bht, bh3, waves;
-				main();
+				}else if (event.mouseButton.button == sf::Mouse::Left){
+					window.close();
+					delete bho, bht, bh3, waves;
+					main();
+				}
 			}
-		}
-    }
+    	}
 //------------------------------------------------------------------------------------
     return 0;
 }
