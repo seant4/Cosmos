@@ -45,11 +45,11 @@ int main(){
 //--------------------------------------------------------------------------------------
 			}else{
 				gpull -= 4;
-    			bht->move((bho->getPosition().x - bht->getPosition().x) / gpull ,(bho->getPosition().y - bht->getPosition().y) / gpull );
-    			bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );
-    			window.draw(*bho);
-    			window.draw(*bht);
-    		 	window.display();
+    				bht->move((bho->getPosition().x - bht->getPosition().x) / gpull ,(bho->getPosition().y - bht->getPosition().y) / gpull );
+    				bho->move(-1 * (bho->getPosition().x - bht->getPosition().x) / gpull,-1 * (bho->getPosition().y - bht->getPosition().y) / gpull );
+    				window.draw(*bho);
+    				window.draw(*bht);
+    		 		window.display();
 				usleep(100000);
 			}
 //-------------------------------------------------------------------------------------
